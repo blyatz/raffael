@@ -37,3 +37,18 @@
     left: 90%;
     animation-duration: 10s;
 }
+
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px white, 0 0 10px #28a745; }
+    50% { text-shadow: 0 0 10px white, 0 0 20px #28a745; }
+    100% { text-shadow: 0 0 5px white, 0 0 10px #28a745; }
+}
+
+.glow-text {
+    font-size: 40px;
+    color: white;
+    animation: glow 2s ease-in-out infinite;
+    text-align: center;
+    margin-top: 20px;
+}
