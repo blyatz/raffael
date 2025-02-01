@@ -230,3 +230,46 @@ nav a {
     width: 100%;
   }
 }
+
+/* Styling untuk Voucher Section */
+.voucher-section {
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.voucher-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+#voucher-code {
+  width: calc(100% - 100px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+#apply-voucher {
+  width: 80px;
+  padding: 10px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#apply-voucher:hover {
+  background-color: #17a94a;
+}
+
+#voucher-message {
+  margin-top: 10px;
+  font-size: 14px;
+}
