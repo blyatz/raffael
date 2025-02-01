@@ -8,8 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const voucherCodeInput = document.getElementById("voucher-code");
   const applyVoucherBtn = document.getElementById("apply-voucher");
   const voucherMessage = document.getElementById("voucher-message");
+  const userBalanceEl = document.getElementById("user-balance");
+  const userBalanceCartEl = document.getElementById("user-balance-cart");
 
-  let voucherDiscount = 0; // Menyimpan nilai diskon voucher
+  let voucherDiscount = 0; // Diskon dari voucher
+  let userBalance = parseFloat(localStorage.getItem("userBalance")) || 500; // Saldo awal $500
+
+  // Update tampilan saldo
+  function updateBalanceDisplay() {
+    if (userBalanceEl) userBalanceEl.textContent = userBalance.toFixed(2);
+    if (userBalanceCartEl) userBalanceCartEl.textContent = userBalance.toFixed(2);
+  }
+  updateBalanceDisplay(); 
 
   // Menampilkan jumlah item di keranjang saat halaman dimuat
   updateCartCount();
@@ -25,10 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-      // Cek apakah produk sudah ada di keranjang
       const existingItem = cartItems.find(item => item.id === id);
       if (existingItem) {
-        existingItem.quantity += 1; // Tambah kuantitas
+        existingItem.quantity += 1;
       } else {
         cartItems.push({ id, title, price, image, quantity: 1 });
       }
@@ -76,8 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartItemsContainer.appendChild(itemDiv);
       });
 
-      // Apply voucher discount
-      total = total - voucherDiscount;
+      total -= voucherDiscount;
       totalAmountEl.textContent = `$${total.toFixed(2)}`;
     }
 
@@ -96,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       input.addEventListener("change", (e) => {
         const itemId = e.target.dataset.id;
         const newQuantity = parseInt(e.target.value);
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
         const item = cartItems.find(i => i.id === itemId);
 
         if (newQuantity >= 1) {
@@ -122,10 +131,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       const selectedPayment = document.querySelector('input[name="payment"]:checked');
+      const total = parseFloat(totalAmountEl.textContent.replace("$", ""));
+
       if (!selectedPayment) {
         alert("Please select a payment method first!");
         return;
       }
+
+      if (userBalance < total) {
+        alert("Insufficient balance to complete the purchase.");
+        return;
+      }
+
+      userBalance -= total;
+      localStorage.setItem("userBalance", userBalance.toFixed(2));
+      updateBalanceDisplay();
 
       if (processingMessage) {
         processingMessage.style.display = "block";
@@ -143,14 +163,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
               localStorage.removeItem("cartItems");
-              window.location.href = "https://instagram.com/bjsxt"; // Mengarahkan ke Instagram
+              window.location.href = "index.html";
             }, 2000);
           }
         }, 500);
-      } else {
-        alert("Thank you for your purchase!");
-        localStorage.removeItem("cartItems");
-        window.location.href = "index.html";
       }
     });
   }
@@ -162,15 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-      // Contoh kode voucher dan diskon
       const validVouchers = {
-        "DISKON10": 10, // Diskon $10
-        "DISKON20": 20, // Diskon $20
+        "DISKON10": 10,
+        "DISKON20": 20,
       };
 
       if (validVouchers[voucherCode]) {
         voucherDiscount = validVouchers[voucherCode];
-        total = total - voucherDiscount;
+        total -= voucherDiscount;
         totalAmountEl.textContent = `$${total.toFixed(2)}`;
         voucherMessage.textContent = `Voucher applied! You saved $${voucherDiscount}.`;
         voucherMessage.style.color = "green";
