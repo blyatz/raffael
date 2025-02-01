@@ -1,0 +1,533 @@
+/* ================================================= */
+/* Global Reset & Global Styles */
+/* ================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* ================================================= */
+/* Header */
+/* ================================================= */
+/* ================================================= */
+/* Header (Pembaruan Aesthetic) */
+/* ================================================= */
+header {
+  background: linear-gradient(135deg, #1f1f1f, #121212);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #333;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1db954;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+header nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #b3b3b3;
+  transition: color 0.3s ease;
+  text-decoration: none;  /* Pastikan tidak ada underline */
+}
+
+header nav ul li a:hover {
+  color: #ffffff;
+}
+
+/* ================================================= */
+/* Tombol Umum (Hapus Garis Bawah & Outline) */
+/* ================================================= */
+button, .btn, .control-btn {
+  text-decoration: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Jika tombol menggunakan tag <a> di dalamnya */
+button a, .btn a {
+  text-decoration: none;
+}
+
+/* Contoh styling tombol modern (untuk tombol di player atau hero) */
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background: #1db954;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  text-decoration: none; /* Hapus underline */
+}
+
+.btn:hover {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+/* ================================================= */
+/* Sisanya mengikuti struktur CSS modern yang sudah dibuat sebelumnya */
+/* ================================================= */
+
+/* Contoh tambahan styling untuk control tombol di player */
+.control-btn {
+  background: #1db954;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+  background: #1ed760;
+}
+
+
+/* ================================================= */
+/* Hero Section */
+/* ================================================= */
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), #121212),
+    url('https://via.placeholder.com/1920x1080') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section .hero-content {
+  max-width: 600px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  color: #1db954;
+  margin-bottom: 10px;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  margin-bottom: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-section .btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background: #1db954;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+}
+
+.hero-section .btn:hover {
+  background: #1ed760;
+}
+
+/* ================================================= */
+/* Playlist Section */
+/* ================================================= */
+.playlist-section {
+  padding: 60px 20px;
+  background-color: #121212;
+}
+
+.playlist-section .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.playlist-section .section-header h2 {
+  font-size: 2rem;
+  color: #1db954;
+  margin-bottom: 10px;
+}
+
+.playlist-section .section-header p {
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+.playlist-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.song-item {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.song-item:hover {
+  transform: scale(1.05);
+}
+
+.song-cover img {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+}
+
+.song-details {
+  margin-left: 15px;
+  flex-grow: 1;
+}
+
+.song-title {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.song-artist {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+.song-action button {
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.song-action button:hover {
+  background-color: #17a34a;
+}
+
+/* ================================================= */
+/* Now Playing Section */
+/* ================================================= */
+.now-playing-section {
+  padding: 60px 20px;
+  background-color: #1e1e1e;
+}
+
+.np-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.np-album-art {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.np-album-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.np-details {
+  text-align: center;
+}
+
+.np-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.np-details p {
+  font-size: 1rem;
+  color: #b3b3b3;
+}
+
+.np-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.control-btn:hover {
+  transform: scale(1.2);
+}
+
+.np-progress-container {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+.np-progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #333333;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.np-progress {
+  width: 0%;
+  height: 100%;
+  background-color: #1db954;
+  border-radius: 4px;
+  transition: width 0.1s linear;
+}
+
+.np-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #b3b3b3;
+}
+
+/* ================================================= */
+/* About Section */
+/* ================================================= */
+.about-section {
+  padding: 60px 20px;
+  background-color: #1e1e1e;
+  text-align: center;
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-container h2 {
+  font-size: 2rem;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 1rem;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+/* ================================================= */
+/* Contact Section */
+/* ================================================= */
+.contact-section {
+  padding: 60px 20px;
+  background-color: #121212;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-container h2 {
+  font-size: 2rem;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+.contact-container p {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-bottom: 20px;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #17a34a;
+}
+
+/* ================================================= */
+/* Testimonials Section */
+/* ================================================= */
+.testimonials-section {
+  padding: 60px 20px;
+  background-color: #1e1e1e;
+  text-align: center;
+}
+
+.testimonials-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonials-container h2 {
+  font-size: 2rem;
+  color: #1db954;
+  margin-bottom: 30px;
+}
+
+.testimonial {
+  background: #121212;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.testimonial:hover {
+  transform: scale(1.03);
+}
+
+.testimonial p {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+.testimonial h3 {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* ================================================= */
+/* Site Footer */
+/* ================================================= */
+.site-footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #1e1e1e;
+  color: #cccccc;
+}
+
+.site-footer p {
+  font-size: 0.9rem;
+}
+
+/* ================================================= */
+/* Animations */
+/* ================================================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ================================================= */
+/* Responsive Styles */
+/* ================================================= */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  .hero-section p {
+    font-size: 1rem;
+  }
+  .playlist-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .np-container {
+    flex-direction: column;
+  }
+  .np-controls {
+    gap: 10px;
+  }
+  .np-progress-container {
+    max-width: 300px;
+  }
+  .about-container,
+  .contact-container,
+  .testimonials-container {
+    padding: 0 20px;
+  }
+}
