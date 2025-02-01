@@ -9,19 +9,22 @@
 <body>
   <header>
     <h1>Your Cart</h1>
+    <div class="user-balance">💰 Saldo: $<span id="user-balance-cart">0.00</span></div>
     <nav>
       <a href="index.html">← Back to Shop</a>
     </nav>
   </header>
 
   <main>
+    <!-- Daftar Produk di Keranjang -->
     <div class="cart-items" id="cart-items">
       <!-- Produk akan di-generate di sini melalui JS -->
     </div>
 
     <!-- Total Keseluruhan -->
     <div class="cart-total">
-      Total: <span id="total-amount">$0.00</span>
+      <h2>Total:</h2>
+      <span id="total-amount">$0.00</span>
     </div>
 
     <!-- Metode Pembayaran -->
@@ -43,13 +46,13 @@
       </div>
     </div>
 
-    <!-- Tambahkan di dalam <main>, sebelum tombol Checkout -->
-<div class="voucher-section">
-  <h2>Apply Voucher</h2>
-  <input type="text" id="voucher-code" placeholder="Enter voucher code">
-  <button id="apply-voucher">Apply</button>
-  <p id="voucher-message" style="color: red; display: none;"></p>
-</div>
+    <!-- Voucher Section -->
+    <div class="voucher-section">
+      <h2>Apply Voucher</h2>
+      <input type="text" id="voucher-code" placeholder="Enter voucher code">
+      <button id="apply-voucher">Apply</button>
+      <p id="voucher-message" style="color: red; display: none;"></p>
+    </div>
 
     <!-- Tombol Checkout -->
     <button class="checkout-btn" id="checkout-btn">Checkout</button>
