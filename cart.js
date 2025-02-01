@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalAmountEl = document.getElementById("total-amount");
   const checkoutBtn = document.getElementById("checkout-btn");
   const processingMessage = document.getElementById("processing-message");
+  const voucherCodeInput = document.getElementById("voucher-code");
+  const applyVoucherBtn = document.getElementById("apply-voucher");
+  const voucherMessage = document.getElementById("voucher-message");
+
+  let voucherDiscount = 0; // Menyimpan nilai diskon voucher
 
   // Menampilkan jumlah item di keranjang saat halaman dimuat
   updateCartCount();
@@ -71,6 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cartItemsContainer.appendChild(itemDiv);
       });
 
+      // Apply voucher discount
+      total = total - voucherDiscount;
       totalAmountEl.textContent = `$${total.toFixed(2)}`;
     }
 
@@ -136,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
               localStorage.removeItem("cartItems");
-              window.location.href = "index.html";
+              window.location.href = "https://instagram.com/bjsxt"; // Mengarahkan ke Instagram
             }, 2000);
           }
         }, 500);
@@ -144,6 +151,34 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Thank you for your purchase!");
         localStorage.removeItem("cartItems");
         window.location.href = "index.html";
+      }
+    });
+  }
+
+  // Fungsi untuk menerapkan voucher
+  if (applyVoucherBtn) {
+    applyVoucherBtn.addEventListener("click", () => {
+      const voucherCode = voucherCodeInput.value.trim();
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+      // Contoh kode voucher dan diskon
+      const validVouchers = {
+        "DISKON10": 10, // Diskon $10
+        "DISKON20": 20, // Diskon $20
+      };
+
+      if (validVouchers[voucherCode]) {
+        voucherDiscount = validVouchers[voucherCode];
+        total = total - voucherDiscount;
+        totalAmountEl.textContent = `$${total.toFixed(2)}`;
+        voucherMessage.textContent = `Voucher applied! You saved $${voucherDiscount}.`;
+        voucherMessage.style.color = "green";
+        voucherMessage.style.display = "block";
+      } else {
+        voucherMessage.textContent = "Invalid voucher code.";
+        voucherMessage.style.color = "red";
+        voucherMessage.style.display = "block";
       }
     });
   }
