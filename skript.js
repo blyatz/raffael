@@ -103,8 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ Database Akun Simulasi
     const users = [
-        { username: "tuan", password: "1234", balance: 500 },
+        { username: "tuan", password: "1234", balance: 50000 },
         { username: "admin", password: "admin123", balance: 1000 },
+        { username: "pickanddussy", password: "ILoveRaffael", balance: 20.50 },
         { username: "guest", password: "guest123", balance: 200 }
     ];
 
