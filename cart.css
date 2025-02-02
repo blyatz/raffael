@@ -75,25 +75,7 @@ nav a {
   color: #555;
 }
 
-/* Icon Keranjang */
-.cart-icon {
-  position: relative;
-  font-size: 20px;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-}
 
-#cart-count {
-  background-color: red;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 50%;
-  font-size: 14px;
-  position: absolute;
-  top: -8px;
-  right: -15px;
-}
 
 /* Tombol Add to Cart */
 .add-to-cart {
@@ -218,7 +200,7 @@ nav a {
 
 /* Pesan Proses */
 #processing-message {
-  background-color: orange;
+  background-color: #00bbff;
   color: white;
   padding: 15px;
   margin-top: 20px;

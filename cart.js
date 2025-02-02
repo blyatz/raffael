@@ -10,21 +10,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const voucherMessage = document.getElementById("voucher-message");
   const userBalanceEl = document.getElementById("user-balance");
   const userBalanceCartEl = document.getElementById("user-balance-cart");
+  const topupBtn = document.getElementById("topup-btn");
 
-  let voucherDiscount = 0; // Diskon dari voucher
-  let userBalance = parseFloat(localStorage.getItem("userBalance")) || 500; // Saldo awal $500
+  // ✅ Ambil data user yang sedang login
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let userBalance = loggedInUser ? loggedInUser.balance : 0;
 
-  // Update tampilan saldo
+  let voucherDiscount = 0; 
+
+  // ✅ Fungsi untuk memperbarui tampilan saldo
   function updateBalanceDisplay() {
     if (userBalanceEl) userBalanceEl.textContent = userBalance.toFixed(2);
     if (userBalanceCartEl) userBalanceCartEl.textContent = userBalance.toFixed(2);
   }
-  updateBalanceDisplay(); 
+  updateBalanceDisplay();
 
-  // Menampilkan jumlah item di keranjang saat halaman dimuat
+  // ✅ Menampilkan jumlah item di keranjang saat halaman dimuat
   updateCartCount();
 
-  // Fungsi untuk menambahkan produk ke keranjang
   addToCartButtons.forEach(button => {
     button.addEventListener("click", () => {
       const product = button.closest(".product");
@@ -47,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fungsi untuk menghitung total item di keranjang
+  // ✅ Fungsi untuk menghitung total item di keranjang
   function updateCartCount() {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -56,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Menampilkan isi keranjang di cart.html
+  // ✅ Menampilkan isi keranjang di cart.html
   if (cartItemsContainer) {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     let total = 0;
@@ -89,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
       totalAmountEl.textContent = `$${total.toFixed(2)}`;
     }
 
-    // Event Listener untuk menghapus item
     document.querySelectorAll(".remove-btn").forEach(button => {
       button.addEventListener("click", (e) => {
         const itemId = e.target.dataset.id;
@@ -99,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Event Listener untuk mengubah jumlah produk
     document.querySelectorAll(".quantity-input").forEach(input => {
       input.addEventListener("change", (e) => {
         const itemId = e.target.dataset.id;
@@ -119,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Fungsi untuk menghapus item dari keranjang
+  // ✅ Fungsi untuk menghapus item dari keranjang
   function removeItem(id) {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     cartItems = cartItems.filter(item => item.id !== id);
@@ -127,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.reload();
   }
 
-  // Tombol Checkout
+  // ✅ Tombol Checkout
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       const selectedPayment = document.querySelector('input[name="payment"]:checked');
@@ -144,7 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       userBalance -= total;
-      localStorage.setItem("userBalance", userBalance.toFixed(2));
+      loggedInUser.balance = userBalance; 
+      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       updateBalanceDisplay();
 
       if (processingMessage) {
@@ -163,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
               localStorage.removeItem("cartItems");
-              window.location.href = "index.html";
+              window.location.href = "thx.html";
             }, 2000);
           }
         }, 500);
@@ -171,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Fungsi untuk menerapkan voucher
+  // ✅ Fungsi untuk menerapkan voucher
   if (applyVoucherBtn) {
     applyVoucherBtn.addEventListener("click", () => {
       const voucherCode = voucherCodeInput.value.trim();
@@ -181,6 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const validVouchers = {
         "DISKON10": 10,
         "DISKON20": 20,
+        "ILOVETOSHA": 500,
+        "ILOVERAFFAEL": 500,
+        "FUCKYOU": -100,
+        "BLYAT": -700,
       };
 
       if (validVouchers[voucherCode]) {
@@ -195,6 +201,13 @@ document.addEventListener("DOMContentLoaded", () => {
         voucherMessage.style.color = "red";
         voucherMessage.style.display = "block";
       }
+    });
+  }
+
+  // ✅ Tombol Top-Up
+  if (topupBtn) {
+    topupBtn.addEventListener("click", () => {
+      window.location.href = "topup.html";
     });
   }
 });

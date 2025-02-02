@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Up Saldo</title>
+  <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+
+  <header>
+    <h1>Top Up Saldo</h1>
+    <nav>
+      <a href="index.html" class="no-underline">← Back to Shop</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="topup-container">
+      <h2>Select Amount to Top Up:</h2>
+
+      <!-- Tombol Pilihan Nominal -->
+      <div class="amount-buttons">
+        <button class="amount-btn" data-amount="1">$1</button>
+        <button class="amount-btn" data-amount="2">$2</button>
+        <button class="amount-btn" data-amount="5">$5</button>
+        <button class="amount-btn" data-amount="10">$10</button>
+        <button class="amount-btn" data-amount="20">$20</button>
+        <button class="amount-btn" data-amount="40">$40</button>
+        <button class="amount-btn" data-amount="50">$50</button>
+        <button class="amount-btn" data-amount="70">$70</button>
+        <button class="amount-btn" data-amount="100">$100</button>
+      </div>
+
+      <!-- Tombol Konfirmasi -->
+      <button id="confirm-topup" disabled>Confirm Top Up</button>
+      <p id="topup-message" style="display: none;"></p>
+    </div>
+  </main>
+
+  <script src="topup.js"></script>
+</body>
+</html>

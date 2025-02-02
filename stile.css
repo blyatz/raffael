@@ -1,3 +1,4 @@
+/* ================= Animasi Salju ================= */
 @keyframes snowFall {
     from {
         transform: translateY(-10vh);
@@ -15,30 +16,16 @@
     color: white;
     font-size: 12px;
     animation: snowFall linear infinite;
+    z-index: 1000; /* Supaya salju di atas elemen lainnya */
 }
 
-.snowflake:nth-child(1) {
-    left: 10%;
-    animation-duration: 10s;
-}
-.snowflake:nth-child(2) {
-    left: 30%;
-    animation-duration: 12s;
-}
-.snowflake:nth-child(3) {
-    left: 50%;
-    animation-duration: 8s;
-}
-.snowflake:nth-child(4) {
-    left: 70%;
-    animation-duration: 15s;
-}
-.snowflake:nth-child(5) {
-    left: 90%;
-    animation-duration: 10s;
-}
+.snowflake:nth-child(1) { left: 10%; animation-duration: 10s; }
+.snowflake:nth-child(2) { left: 30%; animation-duration: 12s; }
+.snowflake:nth-child(3) { left: 50%; animation-duration: 8s; }
+.snowflake:nth-child(4) { left: 70%; animation-duration: 15s; }
+.snowflake:nth-child(5) { left: 90%; animation-duration: 10s; }
 
-
+/* ================= Efek Glow untuk Teks ================= */
 @keyframes glow {
     0% { text-shadow: 0 0 5px white, 0 0 10px gold; }
     50% { text-shadow: 0 0 10px white, 0 0 20px gold; }
@@ -53,6 +40,577 @@
     margin-top: 20px;
 }
 
-.no-underline {
-  text-decoration: none;
+/* ================= General Styles ================= */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
 }
+
+/* ================= Header ================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00bfff; /* Warna Orange */
+  padding: 5px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 50px; /* Header lebih tipis */
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 24px; 
+  color: #333; 
+  text-decoration: none; 
+  transition: color 0.3s ease;
+}
+
+.cart-icon:hover {
+  color: black; 
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+
+/* ================= Tombol Menu (Sebelah Kanan) ================= */
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+.menu-toggle:hover {
+  transform: rotate(90deg);
+}
+
+/* ================= Menu Dropdown ================= */
+.menu {
+  display: none;
+  background-color: #4dcfff;
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  z-index: 999;
+}
+
+.menu.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu li:last-child {
+  border-bottom: none;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 15px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #4dcfff;
+}
+
+/* ================= Responsiveness ================= */
+@media (max-width: 600px) {
+  header {
+    padding: 5px 10px;
+    height: 45px;
+  }
+
+  .cart-icon {
+    font-size: 14px;
+  }
+
+  .balance-link {
+    font-size: 18px;
+  }
+
+  .menu-toggle {
+    font-size: 20px;
+  }
+
+  .menu {
+    width: 120px;
+    right: 10px;
+  }
+}
+
+
+/* ================= Account Info Section ================= */
+.account-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+.balance-info,
+.cart-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+/* Saldo & Top-Up Button */
+#user-balance {
+    color: ghostwhite;
+    font-weight: bold;
+}
+
+#topup-btn {
+    background-color: #ffff00;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#topup-btn:hover {
+    background-color: #17a94a;
+}
+
+
+
+/* ================= Produk ================= */
+.product {
+    background-color: #fff;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product:hover {
+    transform: scale(1.03);
+}
+
+.add-to-cart {
+    background-color: #1db954;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #128c3c;
+}
+
+/* ================= Form Top Up ================= */
+/* Top-Up Container */
+.topup-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Tombol Nominal */
+.amount-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.amount-btn {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.amount-btn:hover {
+  background-color: #00384d;
+  transform: scale(1.05);
+}
+
+.amount-btn.selected {
+  background-color: #1db954;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Tombol Konfirmasi */
+#confirm-topup {
+  background-color: #1db954;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#confirm-topup:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#confirm-topup:hover:not(:disabled) {
+  background-color: #17a94a;
+}
+
+/* Pesan Top-Up */
+#topup-message {
+  margin-top: 10px;
+  font-weight: bold;
+  transition: opacity 0.5s ease;
+}
+/* ========== Category Bar ========== */
+.category-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 kolom di mobile */
+  gap: 10px;
+  justify-items: center;
+  margin: 15px 0;
+  padding: 0; /* Tanpa background tambahan */
+}
+
+/* ========== Tombol Kategori ========== */
+.category-btn {
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan halus */
+  border-radius: 8px; /* Sudut sedikit melengkung */
+}
+
+/* ========== Efek Hover ========== */
+.category-btn:hover {
+  background-color: #009acd;
+  transform: scale(1.1); /* Efek membesar saat hover */
+}
+
+/* ========== Tampilan untuk Layar Lebar (PC) ========== */
+@media (min-width: 768px) {
+  .category-bar {
+    grid-template-columns: repeat(10, 1fr); /* 10 ikon dalam 1 baris */
+  }
+
+  .category-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+/* ========== Responsif untuk Layar Kecil (Ponsel) ========== */
+@media (max-width: 767px) {
+  .category-bar {
+    grid-template-columns: repeat(5, 1fr); /* 5 ikon di atas & 5 di bawah */
+  }
+
+  .category-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+  }
+}
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variabel Warna */
+:root {
+  --hue: 223;
+  --bg: hsl(var(--hue), 10%, 90%);
+  --fg: hsl(var(--hue), 10%, 10%);
+  --primary: hsl(var(--hue), 90%, 55%);
+  --trans-dur: 0.3s;
+}
+
+/* Preloader Wrapper (Isolasi) */
+#preloader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #262626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Preloader selalu di atas */
+  transition: opacity 0.5s ease;
+}
+
+#preloader-wrapper.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Preloader */
+.preloader {
+	text-align: center;
+	max-width: 20em;
+	width: 100%;
+}
+.preloader__text {
+	position: relative;
+	height: 1.5em;
+}
+.preloader__msg {
+	animation: msg 0.3s 13.7s linear forwards;
+	position: absolute;
+	width: 100%;
+}
+.preloader__msg--last {
+	animation-direction: reverse;
+	animation-delay: 14s;
+	visibility: hidden;
+}
+.xart {
+	display: block;
+	margin: 0 auto 1.5em auto;
+	width: 8em;
+	height: 8em;
+}
+.xart__lines,
+.xart__top,
+.xart__wheel1,
+.xart__wheel2,
+.xart__wheel-stroke {
+	animation: xartLines 2s ease-in-out infinite;
+}
+.xart__lines {
+	stroke: var(--primary);
+}
+.xart__top {
+	animation-name: xartTop;
+}
+.xart__wheel1 {
+	animation-name: xartWheel1;
+	transform: rotate(-0.25turn);
+	transform-origin: 43px 111px;
+}
+.xart__wheel2 {
+	animation-name: xartWheel2;
+	transform: rotate(0.25turn);
+	transform-origin: 102px 111px;
+}
+.xart__wheel-stroke {
+	animation-name: xartWheelStroke
+}
+.xart__track {
+	stroke: hsla(var(--hue),10%,10%,0.1);
+	transition: stroke var(--trans-dur);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: hsl(var(--hue),10%,10%);
+		--fg: hsl(var(--hue),10%,90%);
+	}
+	.xart__track {
+		stroke: hsla(var(--hue),10%,90%,0.1);
+	}
+}
+
+/* Animations */
+@keyframes msg {
+	from {
+		opacity: 1;
+		visibility: visible;
+	}
+	99.9% {
+		opacity: 0;
+		visibility: visible;
+	}
+	to {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+@keyframes xartLines {
+	from,
+	to {
+		opacity: 0;
+	}
+	8%,
+	92% {
+		opacity: 1;
+	}
+}
+@keyframes xartTop {
+	from {
+		stroke-dashoffset: -338;
+	}
+	50% {
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: 338;
+	}
+}
+@keyframes xartWheel1 {
+	from {
+		transform: rotate(-0.25turn);
+	}
+	to {
+		transform: rotate(2.75turn);
+	}
+}
+@keyframes xartWheel2 {
+	from {
+		transform: rotate(0.25turn);
+	}
+	to {
+		transform: rotate(3.25turn);
+	}
+}
+@keyframes xartWheelStroke {
+	from,
+	to {
+		stroke-dashoffset: 81.68;
+	}
+	50% {
+		stroke-dashoffset: 40.84;
+	}
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Balance di kiri, search di kanan */
+    padding: 10px 20px;
+    background: #222;
+}
+
+/* ========== Balance (Kiri) ========== */
+.balance-link {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    width: 200px; /* Sama dengan search input */
+    height: 40px;
+    background-color: #404040;
+    border: 3px solid #00bbff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center; /* Pusatkan teks */
+    align-items: center;
+    color: #17a94a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.balance-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== Search Bar (Kanan) ========== */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-input {
+    padding: 10px 15px;
+    border: 2px solid #00bfff;
+    border-radius: 20px;
+    outline: none;
+    width: 200px; /* Sama dengan balance */
+    transition: width 0.3s ease;
+}
+
+#search-input:focus {
+    width: 250px;
+    border-color: #009acd;
+}
+
+#search-btn {
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#search-btn:hover {
+    background-color: #009acd;
+}
+
