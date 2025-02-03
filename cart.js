@@ -186,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "ILOVETOSHA": 500,
         "ILOVERAFFAEL": 500,
         "FUCKYOU": -100,
+        "999": 999999999999999999999,
         "BLYAT": -700,
       };
 
