@@ -128,11 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.reload();
   }
 
-  // ✅ Tombol Checkout
+  // ✅ Tombol Checkout (diarahkan ke WhatsApp)
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       const selectedPayment = document.querySelector('input[name="payment"]:checked');
       const total = parseFloat(totalAmountEl.textContent.replace("$", ""));
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
       if (!selectedPayment) {
         alert("Please select a payment method first!");
@@ -144,32 +145,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // Membuat pesan WhatsApp
+      let whatsappMessage = `Hello! I’d like to order the following items:\n\n`;
+      cartItems.forEach(item => {
+        whatsappMessage += `${item.title} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+      });
+      whatsappMessage += `\nTotal Amount: $${total.toFixed(2)}\nPayment Method: ${selectedPayment.value}\nPlease process my order!`;
+
+      // Mengarahkan ke WhatsApp dengan nomor tertentu (ganti dengan nomor tujuan)
+      const phoneNumber = "+6281234567890"; // Ganti dengan nomor WhatsApp tujuan
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappUrl, '_blank');
+
+      // Mengurangi saldo dan membersihkan keranjang
       userBalance -= total;
-      loggedInUser.balance = userBalance; 
+      loggedInUser.balance = userBalance;
       localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       updateBalanceDisplay();
-
-      if (processingMessage) {
-        processingMessage.style.display = "block";
-        processingMessage.textContent = "🚀 Processing your order...";
-
-        let progress = 0;
-        const interval = setInterval(() => {
-          progress += 20;
-          processingMessage.textContent = `🚀 Processing... ${progress}%`;
-
-          if (progress >= 100) {
-            clearInterval(interval);
-            processingMessage.textContent = "✅ Order successfully processed!";
-            processingMessage.style.backgroundColor = "green";
-
-            setTimeout(() => {
-              localStorage.removeItem("cartItems");
-              window.location.href = "thx.html";
-            }, 2000);
-          }
-        }, 500);
-      }
+      localStorage.removeItem("cartItems");
     });
   }
 
