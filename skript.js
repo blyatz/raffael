@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const users = [
         { username: "tuan", password: "1234", balance: 50000 },
         { username: "admin", password: "admin123", balance: 1000 },
-        { username: "pickanddussy", password: "iloveraffael", balance: 20 },
+        { username: "bitch", password: "bitch", balance: 20 },
         { username: "guest", password: "guest123", balance: 200 }
     ];
 
