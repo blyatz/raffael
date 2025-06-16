@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const floatingBackToShop = document.getElementById("floating-back-to-shop");
 if (floatingBackToShop) {
   floatingBackToShop.addEventListener("click", () => {
-    window.location.href = "shop.html"; // Ganti dengan URL halaman toko Anda
+    window.location.href = "dashboard.html"; // Ganti dengan URL halaman toko Anda
   });
 }
 
