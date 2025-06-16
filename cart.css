@@ -372,3 +372,44 @@ nav a:hover {
     padding: 20px;
   }
 }
+
+/* Tambahkan styling untuk logo mengambang */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+}
+
+.floating-btn:hover img {
+  transform: scale(1.2);
+}
+
+/* Pastikan elemen lain tidak tertutup oleh logo */
+.cart-items,
+.cart-total,
+.payment-method,
+.voucher-section {
+  position: relative;
+  z-index: 900;
+}
