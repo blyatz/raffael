@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const userBalanceCartEl = document.getElementById("user-balance-cart");
   const topupBtn = document.getElementById("topup-btn");
 
+  // Tambahkan event listener untuk logo mengambang
+const floatingBackToShop = document.getElementById("floating-back-to-shop");
+if (floatingBackToShop) {
+  floatingBackToShop.addEventListener("click", () => {
+    window.location.href = "shop.html"; // Ganti dengan URL halaman toko Anda
+  });
+}
+
   // ✅ Ambil data user yang sedang login
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   let userBalance = loggedInUser ? loggedInUser.balance : 0;
@@ -153,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
       whatsappMessage += `\nTotal Amount: $${total.toFixed(2)}\nPayment Method: ${selectedPayment.value}\nPlease process my order!`;
 
       // Mengarahkan ke WhatsApp dengan nomor tertentu (ganti dengan nomor tujuan)
-      const phoneNumber = "+6281234567890"; // Ganti dengan nomor WhatsApp tujuan
+      const phoneNumber = "+6283156992096"; // Ganti dengan nomor WhatsApp tujuan
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
       window.open(whatsappUrl, '_blank');
 
@@ -205,3 +213,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
