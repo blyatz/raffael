@@ -183,10 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const validVouchers = {
         "DISKON10": 10,
         "DISKON20": 20,
-        "ILOVETOSHA": 500,
-        "ILOVERAFFAEL": 500,
-        "FUCKYOU": -100,
-        "999": 999999999999999999999,
+        "FUCKBICH": 500,
+        "OK": 500,
+        "FUCKYOU": 1000,
+        "999": 1000000,
         "BLYAT": -700,
       };
 
