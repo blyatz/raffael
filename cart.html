@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart</title>
   <link rel="stylesheet" href="cart.css"> <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>Your Cart</h1>
     <div class="user-balance">💰 Saldo: $<span id="user-balance-cart">0.00</span></div>
+    <div id="floating-back-to-shop" class="floating-btn">
+  <i class="fas fa-arrow-left"></i>
+</div>
+
   </header>
 
   <main>
@@ -54,9 +59,7 @@
     <!-- Tombol Checkout -->
     <button class="checkout-btn" id="checkout-btn">Checkout</button>
 
-    <div id="floating-back-to-shop" class="floating-btn">
-      <img src="https://via.placeholder.com/50" alt="Back to Shop">
-    </div>
+    
 
     <!-- Notifikasi Proses -->
     <div id="processing-message" style="display: none;"></div>
